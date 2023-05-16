@@ -12,26 +12,12 @@ const io = new Server(server);
 app.set("view engine", "ejs");
 
 app.use(bodyParser.urlencoded({ extended: true }));
-const url =
-  "mongodb+srv://pusech:1uehGyWVmCIO8nvF@messageapp.q7fraig.mongodb.net/Chat?retryWrites=true&w=majority";
-// app.use(express.static("public"));
-mongoose.connect(
-  url,
-  { useNewUrlParser: true, useUnifiedTopology: true },
-  function (err, res) {
-    try {
-      console.log("Connected to Database");
-    } catch (err) {
-      throw err;
-    }
-  }
-);
 
-// mongoose
-//   .connect(
-//     "mongodb+srv://pusech:1uehGyWVmCIO8nvF@messageapp.q7fraig.mongodb.net/Chat?retryWrites=true&w=majority"
-//   )
-//   .catch((err) => "Ошибка подключения к монгоДБ");
+mongoose
+  .connect(
+    "mongodb+srv://pusech:1uehGyWVmCIO8nvF@messageapp.q7fraig.mongodb.net/Chat?retryWrites=true&w=majority"
+  )
+  .catch((err) => "Ошибка подключения к монгоДБ");
 
 const messageSchema = {
   content: String,
