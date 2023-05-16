@@ -15,9 +15,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // app.use(express.static("public"));
 
-mongoose.connect(
-  "mongodb+srv://pusech:1uehGyWVmCIO8nvF@messageapp.q7fraig.mongodb.net/Chat?retryWrites=true&w=majority"
-);
+mongoose
+  .connect(
+    "mongodb+srv://pusech:1uehGyWVmCIO8nvF@messageapp.q7fraig.mongodb.net/Chat?retryWrites=true&w=majority"
+  )
+  .catch((err) => "Ошибка подключения к монгоДБ");
 
 const messageSchema = {
   content: String,
