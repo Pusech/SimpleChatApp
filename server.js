@@ -17,7 +17,7 @@ mongoose
   .connect(
     "mongodb+srv://pusech:1uehGyWVmCIO8nvF@messageapp.q7fraig.mongodb.net/Chat?retryWrites=true&w=majority"
   )
-  .catch((err) => "Ошибка подключения к монгоДБ");
+  .catch((err) => console.log("ошибка при подключении" + err));
 
 const messageSchema = {
   content: String,
@@ -38,7 +38,7 @@ app.get("/", (req, res) => {
     .then((foundMessages) =>
       res.render("index", { listMessages: foundMessages })
     )
-    .catch((err) => "ошибка при поиске" + err);
+    .catch((err) => console.log("ошибка при поиске" + err));
 });
 
 io.on("connection", (socket) => {
