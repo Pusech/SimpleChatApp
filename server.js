@@ -12,7 +12,7 @@ const io = new Server(server);
 app.set("view engine", "ejs");
 
 app.use(bodyParser.urlencoded({ extended: true }));
-
+app.use(express.static("public"));
 mongoose
   .connect(
     "mongodb+srv://pusech:1uehGyWVmCIO8nvF@messageapp.q7fraig.mongodb.net/Chat?retryWrites=true&w=majority"
@@ -48,15 +48,18 @@ io.on("connection", (socket) => {
   });
   socket.on("chat message", (msg) => {
     io.emit("chat message", msg);
-    const newMessage = new Message({
-      content: msg,
-    });
-    newMessage.save();
+    str = msg.replace(/\s+/g, "");
+    if (str != "") {
+      const newMessage = new Message({
+        content: msg,
+      });
+      newMessage.save();
+    }
   });
 });
 
 // Message.find({}).then((msg) => console.log(msg));
 
 server.listen(port, function () {
-  console.log("Server started on render");
+  console.log("Server started on render" + port);
 });
